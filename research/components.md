@@ -1,5 +1,9 @@
 # Game Boy Color Component Breakdown
 
+## Implementation Directive
+
+**IMPORTANT**: Implement one component at a time. Focus on completing one component fully before moving to the next.
+
 ## Component Hierarchy
 
 ```
