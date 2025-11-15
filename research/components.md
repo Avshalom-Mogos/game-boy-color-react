@@ -2,7 +2,9 @@
 
 ## Implementation Directive
 
-**IMPORTANT**: Implement one component at a time. Focus on completing one component fully before moving to the next.
+**IMPORTANT**: 
+- Implement one component at a time. Focus on completing one component fully before moving to the next.
+- **Always render components immediately after creating them** by integrating them into their parent component.
 
 ## Component Hierarchy
 

@@ -31,4 +31,5 @@ components/
 - Use arrow functions for components
 - Use named exports (no default exports)
 - Never destructure props
+- Always use kebab-case for CSS class names (e.g., `.power-indicator`, `.pokeball-container`)
 
