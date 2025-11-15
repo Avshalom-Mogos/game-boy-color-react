@@ -1,4 +1,5 @@
 import styles from './style.module.css';
+import { ArrowButtons } from '../arrow-buttons';
 
 type Direction = 'up' | 'down' | 'left' | 'right' | null;
 
@@ -10,7 +11,7 @@ type ControlsProps = {
 export const Controls = (props: ControlsProps) => {
   return (
     <div className={styles.controls}>
-      {/* ArrowButtons will be implemented here */}
+      <ArrowButtons onDirectionChange={props.onDirectionChange} />
       {/* ActionButtons will be implemented here */}
       {/* SystemButtons will be implemented here */}
     </div>

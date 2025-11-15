@@ -1,0 +1,79 @@
+.arrow-buttons {
+  width: 134px;
+  height: 134px;
+  display: grid;
+  grid-template-columns: 47px 44px 47px;
+  grid-template-rows: 47px 44px 47px;
+  gap: 0;
+}
+
+.arrow-button-up,
+.arrow-button-down,
+.arrow-button-left,
+.arrow-button-right {
+  background: #112d7a;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s ease;
+}
+
+.arrow-button-up:active,
+.arrow-button-down:active,
+.arrow-button-left:active,
+.arrow-button-right:active {
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  transform: translateY(1px);
+}
+
+.arrow-button-up {
+  grid-column: 2;
+  grid-row: 1;
+  border-radius: 7px 7px 0 0;
+}
+
+.arrow-button-down {
+  grid-column: 2;
+  grid-row: 3;
+  border-radius: 0 0 7px 7px;
+}
+
+.arrow-button-left {
+  grid-column: 1;
+  grid-row: 2;
+  border-radius: 7px 0 0 7px;
+}
+
+.arrow-button-right {
+  grid-column: 3;
+  grid-row: 2;
+  border-radius: 0 7px 7px 0;
+}
+
+.arrow-buttons-center {
+  grid-column: 2;
+  grid-row: 2;
+  background: #112d7a;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.center-icon {
+  color: #001e76;
+  font-size: 60px;
+  user-select: none;
+}
+
+.arrow-icon {
+  color: #001e76;
+  font-size: 23px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  user-select: none;
+}
+
