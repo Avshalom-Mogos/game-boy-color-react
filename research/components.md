@@ -11,7 +11,7 @@ GameBoyColor (main container with Shell styling)
 │   └── BrandingText ("GAME BOY COLOR")
 ├── NintendoLogo
 ├── Controls
-│   ├── DPad (directional pad)
+│   ├── ArrowButtons (directional pad)
 │   ├── ActionButtons
 │   │   ├── ActionButton (B)
 │   │   └── ActionButton (A)
@@ -25,36 +25,25 @@ GameBoyColor (main container with Shell styling)
 
 ### GameBoyColor
 - **Purpose**: Root container component (includes Shell styling)
-- **Props**: `onPowerToggle`
+- **Props**: `onPowerToggle`, `onDirectionChange`, `onButtonPress`
 - **Styling**: Yellow matte plastic texture (#FFD700), device dimensions, rounded corners
 
 ```typescript
 type GameBoyColorProps = {
   onPowerToggle?: () => void;
+  onDirectionChange?: (direction: Direction) => void;
+  onButtonPress?: (button: 'A' | 'B' | 'SELECT' | 'START') => void;
 }
 
 export const GameBoyColor = (props: GameBoyColorProps) => {
   return (
     <div className="game-boy-color">
-      <ScreenArea>
-        <ScreenBezel>
-          <PowerIndicator isOn={true} />
-          <Screen />
-        </ScreenBezel>
-        <BrandingText />
-      </ScreenArea>
+      <ScreenArea isOn={true} />
       <NintendoLogo />
-      <Controls>
-        <DPad onDirectionChange={handleDirection} />
-        <ActionButtons>
-          <ActionButton label="B" onPress={handleB} />
-          <ActionButton label="A" onPress={handleA} />
-        </ActionButtons>
-        <SystemButtons>
-          <SystemButton label="SELECT" onPress={handleSelect} />
-          <SystemButton label="START" onPress={handleStart} />
-        </SystemButtons>
-      </Controls>
+      <Controls 
+        onDirectionChange={props.onDirectionChange}
+        onButtonPress={props.onButtonPress}
+      />
       <SpeakerGrille />
     </div>
   );
@@ -64,16 +53,18 @@ export const GameBoyColor = (props: GameBoyColorProps) => {
 ### ScreenArea
 - **Purpose**: Contains screen and branding elements
 - **Layout**: Upper half of device
+- **Props**: `isOn` (for power indicator)
 
 ```typescript
 type ScreenAreaProps = {
-  children: React.ReactNode;
+  isOn?: boolean;
 }
 
 export const ScreenArea = (props: ScreenAreaProps) => {
   return (
     <div className="screen-area">
-      {props.children}
+      <ScreenBezel isOn={props.isOn} />
+      <BrandingText />
     </div>
   );
 };
@@ -83,16 +74,18 @@ export const ScreenArea = (props: ScreenAreaProps) => {
 - **Purpose**: Black glossy frame around screen
 - **Styling**: Glossy black border, rounded corners
 - **Contains**: Power indicator and screen
+- **Props**: `isOn` (for power indicator)
 
 ```typescript
 type ScreenBezelProps = {
-  children: React.ReactNode;
+  isOn?: boolean;
 }
 
 export const ScreenBezel = (props: ScreenBezelProps) => {
   return (
     <div className="screen-bezel">
-      {props.children}
+      <PowerIndicator isOn={props.isOn ?? false} />
+      <Screen />
     </div>
   );
 };
@@ -175,22 +168,30 @@ export const NintendoLogo = () => {
 ### Controls
 - **Purpose**: Container for all control elements
 - **Layout**: Lower section of device
+- **Props**: `onDirectionChange`, `onButtonPress`
 
 ```typescript
 type ControlsProps = {
-  children: React.ReactNode;
+  onDirectionChange?: (direction: Direction) => void;
+  onButtonPress?: (button: 'A' | 'B' | 'SELECT' | 'START') => void;
 }
 
 export const Controls = (props: ControlsProps) => {
   return (
     <div className="controls">
-      {props.children}
+      <ArrowButtons onDirectionChange={props.onDirectionChange} />
+      <ActionButtons 
+        onButtonPress={props.onButtonPress}
+      />
+      <SystemButtons 
+        onButtonPress={props.onButtonPress}
+      />
     </div>
   );
 };
 ```
 
-### DPad
+### ArrowButtons
 - **Purpose**: Directional input control
 - **Props**: `onDirectionChange`, `isPressed`
 - **Styling**: Black cross-shaped pad, positioned lower-left
@@ -199,41 +200,41 @@ export const Controls = (props: ControlsProps) => {
 ```typescript
 type Direction = 'up' | 'down' | 'left' | 'right' | null;
 
-type DPadProps = {
+type ArrowButtonsProps = {
   onDirectionChange: (direction: Direction) => void;
   isPressed?: boolean;
 }
 
-export const DPad = (props: DPadProps) => {
+export const ArrowButtons = (props: ArrowButtonsProps) => {
   const handlePress = (direction: Direction) => {
     props.onDirectionChange(direction);
   };
 
   return (
-    <div className={`d-pad ${props.isPressed ? 'pressed' : ''}`}>
+    <div className={`arrow-buttons ${props.isPressed ? 'pressed' : ''}`}>
       <button 
-        className="d-pad-up"
+        className="arrow-buttons-up"
         onMouseDown={() => handlePress('up')}
         onMouseUp={() => handlePress(null)}
       >
         ↑
       </button>
       <button 
-        className="d-pad-down"
+        className="arrow-buttons-down"
         onMouseDown={() => handlePress('down')}
         onMouseUp={() => handlePress(null)}
       >
         ↓
       </button>
       <button 
-        className="d-pad-left"
+        className="arrow-buttons-left"
         onMouseDown={() => handlePress('left')}
         onMouseUp={() => handlePress(null)}
       >
         ←
       </button>
       <button 
-        className="d-pad-right"
+        className="arrow-buttons-right"
         onMouseDown={() => handlePress('right')}
         onMouseUp={() => handlePress(null)}
       >
@@ -247,16 +248,24 @@ export const DPad = (props: DPadProps) => {
 ### ActionButtons
 - **Purpose**: Container for A and B buttons
 - **Layout**: Lower-right area
+- **Props**: `onButtonPress`
 
 ```typescript
 type ActionButtonsProps = {
-  children: React.ReactNode;
+  onButtonPress?: (button: 'A' | 'B') => void;
 }
 
 export const ActionButtons = (props: ActionButtonsProps) => {
   return (
     <div className="action-buttons">
-      {props.children}
+      <ActionButton 
+        label="B" 
+        onPress={() => props.onButtonPress?.('B')} 
+      />
+      <ActionButton 
+        label="A" 
+        onPress={() => props.onButtonPress?.('A')} 
+      />
     </div>
   );
 };
@@ -290,16 +299,24 @@ export const ActionButton = (props: ActionButtonProps) => {
 ### SystemButtons
 - **Purpose**: Container for Select and Start buttons
 - **Layout**: Centered below Nintendo logo
+- **Props**: `onButtonPress`
 
 ```typescript
 type SystemButtonsProps = {
-  children: React.ReactNode;
+  onButtonPress?: (button: 'SELECT' | 'START') => void;
 }
 
 export const SystemButtons = (props: SystemButtonsProps) => {
   return (
     <div className="system-buttons">
-      {props.children}
+      <SystemButton 
+        label="SELECT" 
+        onPress={() => props.onButtonPress?.('SELECT')} 
+      />
+      <SystemButton 
+        label="START" 
+        onPress={() => props.onButtonPress?.('START')} 
+      />
     </div>
   );
 };
