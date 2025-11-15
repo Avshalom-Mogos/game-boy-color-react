@@ -8,3 +8,26 @@ When working on this project, always read and reference:
 
 These files contain the architecture, component structure, and project roadmap that should guide all development decisions.
 
+## Component Guidelines
+
+Each component is placed in its own folder with a kebab-case name (lowercase with hyphens).
+
+### Folder Structure
+
+```
+components/
+├── component-name/
+│   ├── index.tsx
+│   └── style.module.css
+```
+
+### Folder Content
+
+- **index.tsx** - Component implementation
+- **style.module.css** - Component styles using CSS Modules
+
+### Code Style
+
+- Use arrow functions for components
+- Use named exports (no default exports)
+
