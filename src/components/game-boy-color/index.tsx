@@ -1,4 +1,5 @@
 import styles from './style.module.css';
+import { ScreenArea } from '../screen-area';
 
 export type GameBoyColorProps = {
   onPowerToggle?: () => void;
@@ -7,7 +8,7 @@ export type GameBoyColorProps = {
 export const GameBoyColor = (props: GameBoyColorProps) => {
   return (
     <div className={styles['game-boy-color']}>
-      {/* TODO: Add child components here */}
+      <ScreenArea isOn={true} />
     </div>
   );
 };
