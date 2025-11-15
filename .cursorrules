@@ -30,4 +30,5 @@ components/
 
 - Use arrow functions for components
 - Use named exports (no default exports)
+- Never destructure props
 

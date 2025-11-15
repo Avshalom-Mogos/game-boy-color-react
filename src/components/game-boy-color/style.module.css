@@ -1,0 +1,12 @@
+.game-boy-color {
+  /* Outer shape: 1:1 replica of GBC with straight sides, curved top/bottom */
+  width: 488px;
+  aspect-ratio: 300 / 514;
+  background: #fac31b;
+  position: relative;
+  box-sizing: border-box;
+  
+  /* Simple 10px top corners, large bottom curve */
+  border-radius: 10px 10px 49% 49% / 10px 10px 6.5% 6.5%;
+}
+

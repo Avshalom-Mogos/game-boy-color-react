@@ -3,84 +3,59 @@
 ## Component Hierarchy
 
 ```
-GameBoyColor
-├── Shell (main container)
-│   ├── ScreenArea
-│   │   ├── ScreenBezel
-│   │   │   ├── PowerIndicator (LED)
-│   │   │   └── Screen (LCD display)
-│   │   └── BrandingText ("GAME BOY COLOR")
-│   ├── NintendoLogo
-│   ├── Controls
-│   │   ├── DPad (directional pad)
-│   │   ├── ActionButtons
-│   │   │   ├── ActionButton (B)
-│   │   │   └── ActionButton (A)
-│   │   └── SystemButtons
-│   │       ├── SystemButton (SELECT)
-│   │       └── SystemButton (START)
-│   └── SpeakerGrille
+GameBoyColor (main container with Shell styling)
+├── ScreenArea
+│   ├── ScreenBezel
+│   │   ├── PowerIndicator (LED)
+│   │   └── Screen (LCD display)
+│   └── BrandingText ("GAME BOY COLOR")
+├── NintendoLogo
+├── Controls
+│   ├── DPad (directional pad)
+│   ├── ActionButtons
+│   │   ├── ActionButton (B)
+│   │   └── ActionButton (A)
+│   └── SystemButtons
+│       ├── SystemButton (SELECT)
+│       └── SystemButton (START)
+└── SpeakerGrille
 ```
 
 ## Component Descriptions
 
 ### GameBoyColor
-- **Purpose**: Root container component
-- **Props**: `onPowerToggle`, `children` (emulator screen)
-- **Styling**: Yellow background (#FFD700), rounded corners, device proportions
+- **Purpose**: Root container component (includes Shell styling)
+- **Props**: `onPowerToggle`
+- **Styling**: Yellow matte plastic texture (#FFD700), device dimensions, rounded corners
 
 ```typescript
 type GameBoyColorProps = {
   onPowerToggle?: () => void;
-  children?: React.ReactNode;
 }
 
-export const GameBoyColor: React.FC<GameBoyColorProps> = ({ 
-  onPowerToggle, 
-  children 
-}) => {
+export const GameBoyColor = (props: GameBoyColorProps) => {
   return (
     <div className="game-boy-color">
-      <Shell>
-        <ScreenArea>
-          <ScreenBezel>
-            <PowerIndicator isOn={true} />
-            <Screen>{children}</Screen>
-          </ScreenBezel>
-          <BrandingText />
-        </ScreenArea>
-        <NintendoLogo />
-        <Controls>
-          <DPad onDirectionChange={handleDirection} />
-          <ActionButtons>
-            <ActionButton label="B" onPress={handleB} />
-            <ActionButton label="A" onPress={handleA} />
-          </ActionButtons>
-          <SystemButtons>
-            <SystemButton label="SELECT" onPress={handleSelect} />
-            <SystemButton label="START" onPress={handleStart} />
-          </SystemButtons>
-        </Controls>
-        <SpeakerGrille />
-      </Shell>
-    </div>
-  );
-};
-```
-
-### Shell
-- **Purpose**: Main body container
-- **Styling**: Yellow matte plastic texture, device dimensions
-
-```typescript
-type ShellProps = {
-  children: React.ReactNode;
-}
-
-export const Shell: React.FC<ShellProps> = ({ children }) => {
-  return (
-    <div className="shell">
-      {children}
+      <ScreenArea>
+        <ScreenBezel>
+          <PowerIndicator isOn={true} />
+          <Screen />
+        </ScreenBezel>
+        <BrandingText />
+      </ScreenArea>
+      <NintendoLogo />
+      <Controls>
+        <DPad onDirectionChange={handleDirection} />
+        <ActionButtons>
+          <ActionButton label="B" onPress={handleB} />
+          <ActionButton label="A" onPress={handleA} />
+        </ActionButtons>
+        <SystemButtons>
+          <SystemButton label="SELECT" onPress={handleSelect} />
+          <SystemButton label="START" onPress={handleStart} />
+        </SystemButtons>
+      </Controls>
+      <SpeakerGrille />
     </div>
   );
 };
@@ -95,10 +70,10 @@ type ScreenAreaProps = {
   children: React.ReactNode;
 }
 
-export const ScreenArea: React.FC<ScreenAreaProps> = ({ children }) => {
+export const ScreenArea = (props: ScreenAreaProps) => {
   return (
     <div className="screen-area">
-      {children}
+      {props.children}
     </div>
   );
 };
@@ -114,10 +89,10 @@ type ScreenBezelProps = {
   children: React.ReactNode;
 }
 
-export const ScreenBezel: React.FC<ScreenBezelProps> = ({ children }) => {
+export const ScreenBezel = (props: ScreenBezelProps) => {
   return (
     <div className="screen-bezel">
-      {children}
+      {props.children}
     </div>
   );
 };
@@ -133,9 +108,9 @@ type PowerIndicatorProps = {
   isOn: boolean;
 }
 
-export const PowerIndicator: React.FC<PowerIndicatorProps> = ({ isOn }) => {
+export const PowerIndicator = (props: PowerIndicatorProps) => {
   return (
-    <div className={`power-indicator ${isOn ? 'on' : 'off'}`}>
+    <div className={`power-indicator ${props.isOn ? 'on' : 'off'}`}>
       <div className="power-led" />
       <span className="power-label">POWER</span>
     </div>
@@ -145,19 +120,15 @@ export const PowerIndicator: React.FC<PowerIndicatorProps> = ({ isOn }) => {
 
 ### Screen
 - **Purpose**: LCD display area
-- **Props**: `content` (emulator canvas)
+- **Props**: None
 - **Styling**: Light gray/silver background, pixel grid pattern, 160x144 viewport (scaled)
 
 ```typescript
-type ScreenProps = {
-  children?: React.ReactNode;
-}
-
-export const Screen: React.FC<ScreenProps> = ({ children }) => {
+export const Screen = () => {
   return (
     <div className="screen">
       <div className="screen-content">
-        {children}
+        {/* Emulator canvas will be rendered here */}
       </div>
     </div>
   );
@@ -171,7 +142,7 @@ export const Screen: React.FC<ScreenProps> = ({ children }) => {
   - "COLOR": Multi-colored (C=red, O=orange, L=green, O=blue, R=purple)
 
 ```typescript
-export const BrandingText: React.FC = () => {
+export const BrandingText = () => {
   return (
     <div className="branding-text">
       <span className="game-boy-text">GAME BOY</span>
@@ -192,7 +163,7 @@ export const BrandingText: React.FC = () => {
 - **Styling**: Embossed/debossed effect on yellow plastic
 
 ```typescript
-export const NintendoLogo: React.FC = () => {
+export const NintendoLogo = () => {
   return (
     <div className="nintendo-logo">
       <span>Nintendo</span>
@@ -210,10 +181,10 @@ type ControlsProps = {
   children: React.ReactNode;
 }
 
-export const Controls: React.FC<ControlsProps> = ({ children }) => {
+export const Controls = (props: ControlsProps) => {
   return (
     <div className="controls">
-      {children}
+      {props.children}
     </div>
   );
 };
@@ -233,13 +204,13 @@ type DPadProps = {
   isPressed?: boolean;
 }
 
-export const DPad: React.FC<DPadProps> = ({ onDirectionChange, isPressed }) => {
+export const DPad = (props: DPadProps) => {
   const handlePress = (direction: Direction) => {
-    onDirectionChange(direction);
+    props.onDirectionChange(direction);
   };
 
   return (
-    <div className={`d-pad ${isPressed ? 'pressed' : ''}`}>
+    <div className={`d-pad ${props.isPressed ? 'pressed' : ''}`}>
       <button 
         className="d-pad-up"
         onMouseDown={() => handlePress('up')}
@@ -282,10 +253,10 @@ type ActionButtonsProps = {
   children: React.ReactNode;
 }
 
-export const ActionButtons: React.FC<ActionButtonsProps> = ({ children }) => {
+export const ActionButtons = (props: ActionButtonsProps) => {
   return (
     <div className="action-buttons">
-      {children}
+      {props.children}
     </div>
   );
 };
@@ -303,18 +274,14 @@ type ActionButtonProps = {
   isPressed?: boolean;
 }
 
-export const ActionButton: React.FC<ActionButtonProps> = ({ 
-  label, 
-  onPress, 
-  isPressed 
-}) => {
+export const ActionButton = (props: ActionButtonProps) => {
   return (
     <button 
-      className={`button-${label.toLowerCase()} ${isPressed ? 'pressed' : ''}`}
-      onMouseDown={onPress}
+      className={`button-${props.label.toLowerCase()} ${props.isPressed ? 'pressed' : ''}`}
+      onMouseDown={props.onPress}
       onMouseUp={() => {}}
     >
-      {label}
+      {props.label}
     </button>
   );
 };
@@ -329,10 +296,10 @@ type SystemButtonsProps = {
   children: React.ReactNode;
 }
 
-export const SystemButtons: React.FC<SystemButtonsProps> = ({ children }) => {
+export const SystemButtons = (props: SystemButtonsProps) => {
   return (
     <div className="system-buttons">
-      {children}
+      {props.children}
     </div>
   );
 };
@@ -350,20 +317,16 @@ type SystemButtonProps = {
   isPressed?: boolean;
 }
 
-export const SystemButton: React.FC<SystemButtonProps> = ({ 
-  label, 
-  onPress, 
-  isPressed 
-}) => {
-  const labelLower = label.toLowerCase();
+export const SystemButton = (props: SystemButtonProps) => {
+  const labelLower = props.label.toLowerCase();
   return (
     <div className={`${labelLower}-button-container`}>
       <button 
-        className={`${labelLower}-button ${isPressed ? 'pressed' : ''}`}
-        onMouseDown={onPress}
+        className={`${labelLower}-button ${props.isPressed ? 'pressed' : ''}`}
+        onMouseDown={props.onPress}
         onMouseUp={() => {}}
       />
-      <span className={`${labelLower}-label`}>{label}</span>
+      <span className={`${labelLower}-label`}>{props.label}</span>
     </div>
   );
 };
@@ -374,7 +337,7 @@ export const SystemButton: React.FC<SystemButtonProps> = ({
 - **Styling**: Circular pattern of small black holes, positioned lower-right
 
 ```typescript
-export const SpeakerGrille: React.FC = () => {
+export const SpeakerGrille = () => {
   return (
     <div className="speaker-grille">
       {Array.from({ length: 20 }).map((_, i) => (
@@ -388,13 +351,13 @@ export const SpeakerGrille: React.FC = () => {
 ## Styling Notes
 
 - **Colors**:
-  - Shell: Yellow (#FFD700 or similar)
+  - GameBoyColor (Shell): Yellow (#FFD700 or similar)
   - Buttons/Bezel: Black (#000000)
   - Screen: Light gray (#C0C0C0)
   - Text: White on black, black on yellow
 
 - **Effects**:
-  - Matte plastic texture on shell
+  - Matte plastic texture on GameBoyColor container
   - Glossy finish on buttons and bezel
   - Embossed effect on Nintendo logo
   - Button press animations (slight depression)
