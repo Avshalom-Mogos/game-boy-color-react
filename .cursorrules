@@ -1,0 +1,10 @@
+# Game Boy Color React Project Rules
+
+## Always Include in Context
+
+When working on this project, always read and reference:
+- `research/components.md` - Component breakdown and specifications
+- `research/plan.md` - Project plan and implementation phases
+
+These files contain the architecture, component structure, and project roadmap that should guide all development decisions.
+
