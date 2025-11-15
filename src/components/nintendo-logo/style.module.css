@@ -1,0 +1,60 @@
+.nintendo-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 20px;
+  margin-top: 8px;
+  
+  /* Oval border carved INTO the surface */
+  position: relative;
+}
+
+.nintendo-logo::before {
+  content: '';
+  position: absolute;
+  padding: 15px 65px;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+  border-radius: 32px;
+  
+  /* Carved IN effect - depression into yellow surface */
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.35),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.1),
+    0 1px 0 rgba(255, 255, 255, 0.2);
+  
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.08) 0%,
+    rgba(255, 255, 255, 0.02) 50%,
+    rgba(0, 0, 0, 0.05) 100%
+  );
+}
+
+.nintendo-text {
+  font-family: 'Arial', sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 1.8px;
+  color: #9d8420;
+  position: relative;
+  z-index: 1;
+  
+  /* Letters carved IN - depressed into the surface */
+  text-shadow: 
+    0 -1px 0 rgba(255, 255, 255, 0.3),
+    0 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+.registered {
+  font-size: 10px;
+  font-weight: 900;
+  margin-left: 1px;
+  vertical-align: super;
+  
+  /* Same carved effect as main text */
+  text-shadow: 
+    0 -1px 0 rgba(255, 255, 255, 0.3),
+    0 1px 1px rgba(0, 0, 0, 0.4);
+}
+
