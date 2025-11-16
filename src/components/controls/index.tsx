@@ -18,8 +18,15 @@ export const Controls = (props: ControlsProps) => {
 
   return (
     <div className={styles.controls}>
-      <ArrowButtons onDirectionChange={props.onDirectionChange} />
-      <ActionButtons onButtonPress={handleActionPress} />
+      <div className={styles['buttons-row']}>
+        <ArrowButtons onDirectionChange={props.onDirectionChange} />
+        <ActionButtons onButtonPress={handleActionPress} />
+      </div>
+      <img 
+        src="/pokemon-logo.png" 
+        alt="Pokemon" 
+        className={styles['pokemon-logo']} 
+      />
       {/* SystemButtons will be implemented here */}
     </div>
   );
