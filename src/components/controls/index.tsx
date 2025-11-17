@@ -1,6 +1,7 @@
 import styles from './style.module.css';
 import { ArrowButtons } from '../arrow-buttons';
 import { ActionButtons } from '../action-buttons';
+import { SystemButtons } from '../system-buttons';
 
 type Direction = 'up' | 'down' | 'left' | 'right' | null;
 
@@ -11,6 +12,12 @@ type ControlsProps = {
 
 export const Controls = (props: ControlsProps) => {
   const handleActionPress = (button: 'A' | 'B') => {
+    if (props.onButtonPress) {
+      props.onButtonPress(button);
+    }
+  };
+
+  const handleSystemPress = (button: 'SELECT' | 'START') => {
     if (props.onButtonPress) {
       props.onButtonPress(button);
     }
@@ -27,7 +34,7 @@ export const Controls = (props: ControlsProps) => {
         alt="Pokemon" 
         className={styles['pokemon-logo']} 
       />
-      {/* SystemButtons will be implemented here */}
+      <SystemButtons onButtonPress={handleSystemPress} />
     </div>
   );
 };
