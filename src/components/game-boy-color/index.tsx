@@ -2,6 +2,7 @@ import styles from './style.module.css';
 import { ScreenArea } from '../screen-area';
 import { NintendoLogo } from '../nintendo-logo';
 import { Controls } from '../controls';
+import { SpeakerGrille } from '../speaker-grille';
 
 export type GameBoyColorProps = {
   onPowerToggle?: () => void;
@@ -18,6 +19,7 @@ export const GameBoyColor = (props: GameBoyColorProps) => {
         onDirectionChange={props.onDirectionChange}
         onButtonPress={props.onButtonPress}
       />
+      <SpeakerGrille />
     </div>
   );
 };

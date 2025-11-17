@@ -1,0 +1,125 @@
+.speaker-grille {
+  position: absolute;
+  bottom: 40px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.speaker-row {
+  display: flex;
+  gap: 6px;
+  position: relative;
+  transform: rotate(-15deg);
+}
+
+.speaker-row:first-child,
+.speaker-row:last-child {
+  margin-left: 14px; /* 8px (dot width) + 6px (gap) */
+}
+
+/* Hide dots 7 and 8 in first and last rows */
+.speaker-row:first-child .speaker-hole:nth-child(n+7),
+.speaker-row:last-child .speaker-hole:nth-child(n+7) {
+  display: none;
+}
+
+.speaker-hole {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.8),
+    0 0.5px 1px rgba(0, 0, 0, 0.3);
+  background: #151615;
+}
+
+/* Row 1: b,b,y,b,y,b (starts black, odd=black, even=yellow) */
+.speaker-row:nth-child(1) .speaker-hole:nth-child(odd) {
+  background: #151615;
+}
+.speaker-row:nth-child(1) .speaker-hole:nth-child(even) {
+  background: #fac31b;
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 0.5px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Row 2: b,y,b,y,b,y,b,y (starts black, odd=black, even=yellow) */
+.speaker-row:nth-child(2) .speaker-hole:nth-child(odd) {
+  background: #151615;
+}
+.speaker-row:nth-child(2) .speaker-hole:nth-child(even) {
+  background: #fac31b;
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 0.5px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Row 3: y,b,y,b,y,b,y,b (starts yellow, odd=yellow, even=black) */
+.speaker-row:nth-child(3) .speaker-hole:nth-child(odd) {
+  background: #fac31b;
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 0.5px 1px rgba(0, 0, 0, 0.2);
+}
+.speaker-row:nth-child(3) .speaker-hole:nth-child(even) {
+  background: #151615;
+}
+
+/* Row 4: b,y,b,y,b,y,b,y (starts black, odd=black, even=yellow) */
+.speaker-row:nth-child(4) .speaker-hole:nth-child(odd) {
+  background: #151615;
+}
+.speaker-row:nth-child(4) .speaker-hole:nth-child(even) {
+  background: #fac31b;
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 0.5px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Row 5: y,b,y,b,y,b,y,b (starts yellow, odd=yellow, even=black) */
+.speaker-row:nth-child(5) .speaker-hole:nth-child(odd) {
+  background: #fac31b;
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 0.5px 1px rgba(0, 0, 0, 0.2);
+}
+.speaker-row:nth-child(5) .speaker-hole:nth-child(even) {
+  background: #151615;
+}
+
+/* Row 6: b,y,b,y,b,y,b,y (starts black, odd=black, even=yellow) */
+.speaker-row:nth-child(6) .speaker-hole:nth-child(odd) {
+  background: #151615;
+}
+.speaker-row:nth-child(6) .speaker-hole:nth-child(even) {
+  background: #fac31b;
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 0.5px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Row 7: y,b,y,b,y,b,y,b (starts yellow, odd=yellow, even=black) */
+.speaker-row:nth-child(7) .speaker-hole:nth-child(odd) {
+  background: #fac31b;
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 0.5px 1px rgba(0, 0, 0, 0.2);
+}
+.speaker-row:nth-child(7) .speaker-hole:nth-child(even) {
+  background: #151615;
+}
+
+/* Row 8: y,b,y,b,y,b (starts yellow, odd=yellow, even=black) */
+.speaker-row:nth-child(8) .speaker-hole:nth-child(odd) {
+  background: #fac31b;
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 0.5px 1px rgba(0, 0, 0, 0.2);
+}
+.speaker-row:nth-child(8) .speaker-hole:nth-child(even) {
+  background: #151615;
+}
+
