@@ -12,6 +12,15 @@ dist
 dist-ssr
 *.local
 
+# ROM files
+roms/
+*.gb
+*.gbc
+*.gba
+*.nes
+*.smc
+*.sfc
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

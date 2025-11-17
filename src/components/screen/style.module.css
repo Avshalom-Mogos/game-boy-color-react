@@ -1,0 +1,48 @@
+.screen {
+  width: 65%;
+  height: 70%;
+  aspect-ratio: 1 / 1;
+  background-color: #c0c0c0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.screen-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* EmulatorJS canvas styling */
+.screen-content canvas {
+  max-width: 100%;
+  max-height: 100%;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Hide EmulatorJS UI elements - only show the game canvas */
+.screen-content :global(.ejs-main-gui) {
+  display: none !important;
+}
+
+.screen-content :global(.ejs-controls) {
+  display: none !important;
+}
+
+.screen-content :global(.ejs-toolbar) {
+  display: none !important;
+}
+
+.screen-content :global(.ejs-ad-container) {
+  display: none !important;
+}
+
