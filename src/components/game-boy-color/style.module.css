@@ -1,12 +1,18 @@
 .game-boy-color {
   /* Outer shape: 1:1 replica of GBC with straight sides, curved top/bottom */
-  width: calc(var(--scale, 1) * 488px);
+  /* Prioritize height: fill height, width scales proportionally, capped if needed */
+  /* Use dvh to account for mobile browser UI */
+  height: calc(100dvh - 32px);
   aspect-ratio: 300 / 514;
+  max-width: calc(100vw - 32px);
   background: #fac31b;
   position: relative;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  
+  /* Override scale to match actual rendered scale (height-based, but capped by width) */
+  --scale: min(var(--scale-y), var(--scale-x), 1);
   
   /* Simple 10px top corners, large bottom curve - scale the border radius */
   border-radius: 

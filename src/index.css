@@ -6,26 +6,39 @@
 
 :root {
   /* Calculate responsive scale factor in CSS - set globally so all components can access it */
+  /* Prioritize height: fill available height, but ensure width fits */
+  /* Use dvh (dynamic viewport height) to account for mobile browser UI */
   --base-width: 488px;
   --base-height: calc(488px * 514 / 300);
   --available-width: calc(100vw - 32px);
-  --available-height: calc(100vh - 32px);
+  --available-height: calc(100dvh - 32px);
   --scale-x: calc(var(--available-width) / var(--base-width));
   --scale-y: calc(var(--available-height) / var(--base-height));
-  --scale: min(var(--scale-x), var(--scale-y), 1);
+  /* Calculate width if we use scale-y, check if it exceeds viewport */
+  --width-if-scale-y: calc(var(--scale-y) * var(--base-width));
+  --scale-y-fits-width: calc(var(--width-if-scale-y) <= var(--available-width));
+  /* Prioritize height: use scale-y if width fits, otherwise use scale-x */
+  --scale: min(var(--scale-y), var(--scale-x), 1);
 }
 
 body {
   margin: 0;
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 100dvh;
   overflow: hidden;
+  /* Prevent pull-to-refresh on mobile */
+  overscroll-behavior: none;
+  /* Handle safe areas on iOS */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 #root {
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   background-color: #242424;
+  /* Handle safe areas */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* Remove tap highlight and focus outline on buttons */
