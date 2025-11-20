@@ -11,6 +11,7 @@ declare global {
     EJS_color: string;
     EJS_VirtualGamepadSettings: string;
     EJS_disableSettings?: boolean;
+    EJS_gamepadSettings?: string;
   }
 }
 
@@ -21,12 +22,10 @@ export type UseEmulatorOptions = {
   color?: string;
 };
 
-export const useEmulator = (options: UseEmulatorOptions) => {
+export const useEmulator = (options: UseEmulatorOptions): string => {
   const scriptLoadedRef = useRef(false);
 
   useEffect(() => {
-    if (scriptLoadedRef.current) return;
-
     // Configure EmulatorJS
     window.EJS_player = `#${options.containerId}`;
     window.EJS_core = options.core;
@@ -35,6 +34,7 @@ export const useEmulator = (options: UseEmulatorOptions) => {
     window.EJS_startOnLoaded = true;
     window.EJS_color = options.color ?? '#8a9584';
     window.EJS_VirtualGamepadSettings = 'disabled';
+    window.EJS_gamepadSettings = 'disabled';
     window.EJS_disableSettings = true;
     
     // Load EmulatorJS from CDN
@@ -53,10 +53,21 @@ export const useEmulator = (options: UseEmulatorOptions) => {
     document.body.appendChild(script);
 
     return () => {
+      // Clean up the container to stop the emulator instance
+      const container = document.getElementById(options.containerId);
+      if (container) {
+        container.innerHTML = '';
+      }
+      
+      // Remove the script
       if (document.body.contains(script)) {
         document.body.removeChild(script);
       }
+      
+      scriptLoadedRef.current = false;
     };
   }, [options.containerId, options.core, options.gameUrl, options.color]);
+
+  return options.containerId;
 };
 

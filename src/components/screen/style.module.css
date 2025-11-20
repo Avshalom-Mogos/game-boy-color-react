@@ -46,3 +46,20 @@
   display: none !important;
 }
 
+.screen-content :global(.ejs-virtual-gamepad) {
+  display: none !important;
+}
+
+.screen-content :global(.ejs-gamepad) {
+  display: none !important;
+}
+
+.screen-content :global([id*="gamepad"]) {
+  display: none !important;
+}
+
+.screen-content :global([class*="gamepad"]) {
+  display: none !important;
+}
+
+

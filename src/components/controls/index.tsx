@@ -2,24 +2,36 @@ import styles from './style.module.css';
 import { ArrowButtons } from '../arrow-buttons';
 import { ActionButtons } from '../action-buttons';
 import { SystemButtons } from '../system-buttons';
-
-type Direction = 'up' | 'down' | 'left' | 'right' | null;
+import { GameBoyButton } from '../../hooks/use-game-controls';
 
 type ControlsProps = {
-  onDirectionChange?: (direction: Direction) => void;
-  onButtonPress?: (button: 'A' | 'B' | 'SELECT' | 'START') => void;
+  onDirectionChange?: (direction: GameBoyButton | null) => void;
+  onButtonPress?: (button: GameBoyButton) => void;
+  onButtonRelease?: (button: GameBoyButton) => void;
 };
 
 export const Controls = (props: ControlsProps) => {
-  const handleActionPress = (button: 'A' | 'B') => {
+  const handleActionPress = (button: GameBoyButton.A | GameBoyButton.B) => {
     if (props.onButtonPress) {
       props.onButtonPress(button);
     }
   };
 
-  const handleSystemPress = (button: 'SELECT' | 'START') => {
+  const handleActionRelease = (button: GameBoyButton.A | GameBoyButton.B) => {
+    if (props.onButtonRelease) {
+      props.onButtonRelease(button);
+    }
+  };
+
+  const handleSystemPress = (button: GameBoyButton.SELECT | GameBoyButton.START) => {
     if (props.onButtonPress) {
       props.onButtonPress(button);
+    }
+  };
+
+  const handleSystemRelease = (button: GameBoyButton.SELECT | GameBoyButton.START) => {
+    if (props.onButtonRelease) {
+      props.onButtonRelease(button);
     }
   };
 
@@ -27,14 +39,20 @@ export const Controls = (props: ControlsProps) => {
     <div className={styles.controls}>
       <div className={styles['buttons-row']}>
         <ArrowButtons onDirectionChange={props.onDirectionChange} />
-        <ActionButtons onButtonPress={handleActionPress} />
+        <ActionButtons 
+          onButtonPress={handleActionPress}
+          onButtonRelease={handleActionRelease}
+        />
       </div>
       <img 
         src="/pokemon-logo.png" 
         alt="Pokemon" 
         className={styles['pokemon-logo']} 
       />
-      <SystemButtons onButtonPress={handleSystemPress} />
+      <SystemButtons 
+        onButtonPress={handleSystemPress}
+        onButtonRelease={handleSystemRelease}
+      />
     </div>
   );
 };

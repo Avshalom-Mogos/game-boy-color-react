@@ -1,14 +1,13 @@
 import styles from './style.module.css';
-
-type Direction = 'up' | 'down' | 'left' | 'right' | null;
+import { GameBoyButton } from '../../hooks/use-game-controls';
 
 type ArrowButtonsProps = {
-  onDirectionChange?: (direction: Direction) => void;
+  onDirectionChange?: (direction: GameBoyButton | null) => void;
   isPressed?: boolean;
 }
 
 export const ArrowButtons = (props: ArrowButtonsProps) => {
-  const handlePress = (direction: Direction) => {
+  const handlePress = (direction: GameBoyButton | null) => {
     if (props.onDirectionChange) {
       props.onDirectionChange(direction);
     }
@@ -18,7 +17,7 @@ export const ArrowButtons = (props: ArrowButtonsProps) => {
     <div className={`${styles['arrow-buttons']} ${props.isPressed ? styles.pressed : ''}`}>
       <button 
         className={styles['arrow-button-up']}
-        onMouseDown={() => handlePress('up')}
+        onMouseDown={() => handlePress(GameBoyButton.UP)}
         onMouseUp={() => handlePress(null)}
         onMouseLeave={() => handlePress(null)}
         aria-label="Up"
@@ -27,7 +26,7 @@ export const ArrowButtons = (props: ArrowButtonsProps) => {
       </button>
       <button 
         className={styles['arrow-button-down']}
-        onMouseDown={() => handlePress('down')}
+        onMouseDown={() => handlePress(GameBoyButton.DOWN)}
         onMouseUp={() => handlePress(null)}
         onMouseLeave={() => handlePress(null)}
         aria-label="Down"
@@ -36,7 +35,7 @@ export const ArrowButtons = (props: ArrowButtonsProps) => {
       </button>
       <button 
         className={styles['arrow-button-left']}
-        onMouseDown={() => handlePress('left')}
+        onMouseDown={() => handlePress(GameBoyButton.LEFT)}
         onMouseUp={() => handlePress(null)}
         onMouseLeave={() => handlePress(null)}
         aria-label="Left"
@@ -45,7 +44,7 @@ export const ArrowButtons = (props: ArrowButtonsProps) => {
       </button>
       <button 
         className={styles['arrow-button-right']}
-        onMouseDown={() => handlePress('right')}
+        onMouseDown={() => handlePress(GameBoyButton.RIGHT)}
         onMouseUp={() => handlePress(null)}
         onMouseLeave={() => handlePress(null)}
         aria-label="Right"
