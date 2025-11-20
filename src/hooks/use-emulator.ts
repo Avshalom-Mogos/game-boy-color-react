@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // Declare EmulatorJS global variables for TypeScript
 declare global {
@@ -22,10 +22,17 @@ export type UseEmulatorOptions = {
   color?: string;
 };
 
-export const useEmulator = (options: UseEmulatorOptions): string => {
+export type UseEmulatorResult = {
+  containerId: string;
+  isLoading: boolean;
+};
+
+export const useEmulator = (options: UseEmulatorOptions): UseEmulatorResult => {
   const scriptLoadedRef = useRef(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     // Configure EmulatorJS
     window.EJS_player = `#${options.containerId}`;
     window.EJS_core = options.core;
@@ -45,9 +52,26 @@ export const useEmulator = (options: UseEmulatorOptions): string => {
     script.onload = () => {
       scriptLoadedRef.current = true;
       console.log('EmulatorJS loader.js loaded.');
+      
+      // Poll for canvas element to detect when emulator is ready
+      const checkReady = setInterval(() => {
+        const container = document.getElementById(options.containerId);
+        const canvas = container?.querySelector('canvas');
+        if (canvas) {
+          setIsLoading(false);
+          clearInterval(checkReady);
+        }
+      }, 100);
+      
+      // Timeout after 30 seconds
+      setTimeout(() => {
+        clearInterval(checkReady);
+        setIsLoading(false);
+      }, 30000);
     };
     script.onerror = (error) => {
       console.error('Error loading EmulatorJS loader.js:', error);
+      setIsLoading(false);
     };
 
     document.body.appendChild(script);
@@ -65,9 +89,11 @@ export const useEmulator = (options: UseEmulatorOptions): string => {
       }
       
       scriptLoadedRef.current = false;
+      setIsLoading(true);
     };
   }, [options.containerId, options.core, options.gameUrl, options.color]);
 
-  return options.containerId;
+  return { containerId: options.containerId, isLoading };
 };
+
 
