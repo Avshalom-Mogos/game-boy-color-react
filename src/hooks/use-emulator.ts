@@ -20,18 +20,35 @@ export type UseEmulatorOptions = {
   gameUrl: string;
   containerId: string;
   color?: string;
+  autoStart?: boolean;
 };
 
 export type UseEmulatorResult = {
   containerId: string;
   isLoading: boolean;
+  isInitialized: boolean;
+  initEmulator: () => void;
 };
 
 export const useEmulator = (options: UseEmulatorOptions): UseEmulatorResult => {
   const scriptLoadedRef = useRef(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isInitialized, setIsInitialized] = useState(false);
+  const [shouldInit, setShouldInit] = useState(options.autoStart ?? true);
+
+  const initEmulator = () => {
+    if (!isInitialized) {
+      setShouldInit(true);
+      setIsInitialized(true);
+    }
+  };
 
   useEffect(() => {
+    if (!shouldInit) {
+      setIsLoading(false);
+      return;
+    }
+
     setIsLoading(true);
     // Configure EmulatorJS
     window.EJS_player = `#${options.containerId}`;
@@ -91,9 +108,9 @@ export const useEmulator = (options: UseEmulatorOptions): UseEmulatorResult => {
       scriptLoadedRef.current = false;
       setIsLoading(true);
     };
-  }, [options.containerId, options.core, options.gameUrl, options.color]);
+  }, [shouldInit, options.containerId, options.core, options.gameUrl, options.color]);
 
-  return { containerId: options.containerId, isLoading };
+  return { containerId: options.containerId, isLoading, isInitialized, initEmulator };
 };
 
 

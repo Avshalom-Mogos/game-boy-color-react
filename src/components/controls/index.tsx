@@ -8,6 +8,7 @@ type ControlsProps = {
   onDirectionChange?: (direction: GameBoyButton | null) => void;
   onButtonPress?: (button: GameBoyButton) => void;
   onButtonRelease?: (button: GameBoyButton) => void;
+  onStartPress?: () => void;
 };
 
 export const Controls = (props: ControlsProps) => {
@@ -52,6 +53,7 @@ export const Controls = (props: ControlsProps) => {
       <SystemButtons 
         onButtonPress={handleSystemPress}
         onButtonRelease={handleSystemRelease}
+        onStartPress={props.onStartPress}
       />
     </div>
   );

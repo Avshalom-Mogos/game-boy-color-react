@@ -5,13 +5,14 @@ import { Screen } from '../screen';
 
 export type ScreenBezelProps = {
   isOn?: boolean;
+  onEmulatorReady?: (initEmulator: () => void) => void;
 };
 
 export const ScreenBezel = (props: ScreenBezelProps) => {
   return (
     <div className={styles['screen-bezel']}>
       <PowerIndicator isOn={props.isOn ?? false} />
-      <Screen />
+      <Screen onEmulatorReady={props.onEmulatorReady} />
       <BrandingText />
     </div>
   );

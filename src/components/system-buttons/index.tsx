@@ -4,10 +4,14 @@ import { GameBoyButton } from '../../hooks/use-game-controls';
 type SystemButtonsProps = {
   onButtonPress?: (button: GameBoyButton.SELECT | GameBoyButton.START) => void;
   onButtonRelease?: (button: GameBoyButton.SELECT | GameBoyButton.START) => void;
+  onStartPress?: () => void;
 };
 
 export const SystemButtons = (props: SystemButtonsProps) => {
   const handlePress = (button: GameBoyButton.SELECT | GameBoyButton.START) => {
+    if (button === GameBoyButton.START && props.onStartPress) {
+      props.onStartPress();
+    }
     if (props.onButtonPress) {
       props.onButtonPress(button);
     }
