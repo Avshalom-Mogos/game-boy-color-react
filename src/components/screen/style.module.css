@@ -62,6 +62,19 @@
   display: none !important;
 }
 
+/* Hide settings menu */
+.screen-content :global(.ejs-menu) {
+  display: none !important;
+}
+
+.screen-content :global([class*="menu"]) {
+  display: none !important;
+}
+
+.screen-content :global([class*="settings"]) {
+  display: none !important;
+}
+
 .loading-overlay {
   position: absolute;
   inset: 0;
