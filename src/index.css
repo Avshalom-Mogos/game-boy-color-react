@@ -4,6 +4,17 @@
   box-sizing: border-box;
 }
 
+:root {
+  /* Calculate responsive scale factor in CSS - set globally so all components can access it */
+  --base-width: 488px;
+  --base-height: calc(488px * 514 / 300);
+  --available-width: calc(100vw - 32px);
+  --available-height: calc(100vh - 32px);
+  --scale-x: calc(var(--available-width) / var(--base-width));
+  --scale-y: calc(var(--available-height) / var(--base-height));
+  --scale: min(var(--scale-x), var(--scale-y), 1);
+}
+
 body {
   margin: 0;
   min-width: 320px;

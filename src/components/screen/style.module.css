@@ -3,7 +3,7 @@
   height: 70%;
   aspect-ratio: 1 / 1;
   background-color: #c0c0c0;
-  border-radius: 4px;
+  border-radius: calc(var(--scale, 1) * 4px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,7 +94,7 @@
 
 .start-message {
   color: #fff;
-  font-size: 1.2rem;
+  font-size: calc(var(--scale, 1) * 19.2px);
   font-family: monospace;
   text-align: center;
   animation: pulse 1.5s ease-in-out infinite;

@@ -2,7 +2,7 @@
   height: 45%;
   display: flex;
   flex-direction: column;
-  padding: 40px;
+  padding: calc(var(--scale, 1) * 40px);
   align-items: center;
 }
 
@@ -13,10 +13,10 @@
 }
 
 .pokemon-logo {
-  width: 200px;
+  width: calc(var(--scale, 1) * 200px);
   height: auto;
   object-fit: contain;
   background: transparent;
-  margin-top: 15px;
+  margin-top: calc(var(--scale, 1) * 15px);
 }
 

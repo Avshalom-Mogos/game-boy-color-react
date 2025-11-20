@@ -2,13 +2,13 @@
   display: flex;
   align-items: baseline;
   justify-content: center;
-  gap: 8px;
+  gap: calc(var(--scale, 1) * 8px);
   font-family: 'Helvetica Neue', 'Arial', sans-serif;
   font-weight: 500;
-  font-size: 35px;
-  letter-spacing: -2px;
+  font-size: calc(var(--scale, 1) * 35px);
+  letter-spacing: calc(var(--scale, 1) * -2px);
   user-select: none;
-  margin-top: 15px;
+  margin-top: calc(var(--scale, 1) * 15px);
 }
 
 .game-boy-text {
@@ -16,8 +16,8 @@
   font-style: italic;
   color: #5a6b6a;
   text-shadow: 
-    0.5px 0.5px 0 rgba(0, 0, 0, 0.15),
-    -0.5px -0.5px 0 rgba(255, 255, 255, 0.3);
+    calc(var(--scale, 1) * 0.5px) calc(var(--scale, 1) * 0.5px) 0 rgba(0, 0, 0, 0.15),
+    calc(var(--scale, 1) * -0.5px) calc(var(--scale, 1) * -0.5px) 0 rgba(255, 255, 255, 0.3);
 }
 
 .color-text {
@@ -29,8 +29,8 @@
   font-family: 'Comic Sans MS', cursive;
   font-weight: 700;
   text-shadow: 
-    0.5px 0.5px 0 rgba(0, 0, 0, 0.15),
-    -0.5px -0.5px 0 rgba(255, 255, 255, 0.3);
+    calc(var(--scale, 1) * 0.5px) calc(var(--scale, 1) * 0.5px) 0 rgba(0, 0, 0, 0.15),
+    calc(var(--scale, 1) * -0.5px) calc(var(--scale, 1) * -0.5px) 0 rgba(255, 255, 255, 0.3);
 }
 
 .c-red {
