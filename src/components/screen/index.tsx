@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import styles from './style.module.css';
 import { useEmulator } from '../../hooks/use-emulator';
+import { ROM_URL } from '../../constants/rom';
 
 export type ScreenProps = {
   onEmulatorReady?: (initEmulator: () => void) => void;
@@ -9,7 +10,7 @@ export type ScreenProps = {
 export const Screen = (props: ScreenProps) => {
   const { containerId, isLoading, isInitialized, initEmulator } = useEmulator({
     core: 'gba',
-    gameUrl: '/roms/Pokemon - FireRed Version (USA, Europe)/Pokemon - FireRed Version (USA, Europe).gba',
+    gameUrl: ROM_URL,
     containerId: 'emulator-container',
     color: '#8a9584',
     autoStart: false,
