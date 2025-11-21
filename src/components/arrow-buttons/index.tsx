@@ -20,6 +20,18 @@ export const ArrowButtons = (props: ArrowButtonsProps) => {
         onMouseDown={() => handlePress(GameBoyButton.UP)}
         onMouseUp={() => handlePress(null)}
         onMouseLeave={() => handlePress(null)}
+        onTouchStart={(e) => {
+          e.preventDefault();
+          handlePress(GameBoyButton.UP);
+        }}
+        onTouchEnd={(e) => {
+          e.preventDefault();
+          handlePress(null);
+        }}
+        onTouchCancel={(e) => {
+          e.preventDefault();
+          handlePress(null);
+        }}
         aria-label="Up"
       >
         <span className={styles['arrow-icon']}>▲</span>
@@ -29,6 +41,18 @@ export const ArrowButtons = (props: ArrowButtonsProps) => {
         onMouseDown={() => handlePress(GameBoyButton.DOWN)}
         onMouseUp={() => handlePress(null)}
         onMouseLeave={() => handlePress(null)}
+        onTouchStart={(e) => {
+          e.preventDefault();
+          handlePress(GameBoyButton.DOWN);
+        }}
+        onTouchEnd={(e) => {
+          e.preventDefault();
+          handlePress(null);
+        }}
+        onTouchCancel={(e) => {
+          e.preventDefault();
+          handlePress(null);
+        }}
         aria-label="Down"
       >
         <span className={styles['arrow-icon']}>▼</span>
@@ -38,6 +62,18 @@ export const ArrowButtons = (props: ArrowButtonsProps) => {
         onMouseDown={() => handlePress(GameBoyButton.LEFT)}
         onMouseUp={() => handlePress(null)}
         onMouseLeave={() => handlePress(null)}
+        onTouchStart={(e) => {
+          e.preventDefault();
+          handlePress(GameBoyButton.LEFT);
+        }}
+        onTouchEnd={(e) => {
+          e.preventDefault();
+          handlePress(null);
+        }}
+        onTouchCancel={(e) => {
+          e.preventDefault();
+          handlePress(null);
+        }}
         aria-label="Left"
       >
         <span className={styles['arrow-icon']}>◀</span>
@@ -47,6 +83,18 @@ export const ArrowButtons = (props: ArrowButtonsProps) => {
         onMouseDown={() => handlePress(GameBoyButton.RIGHT)}
         onMouseUp={() => handlePress(null)}
         onMouseLeave={() => handlePress(null)}
+        onTouchStart={(e) => {
+          e.preventDefault();
+          handlePress(GameBoyButton.RIGHT);
+        }}
+        onTouchEnd={(e) => {
+          e.preventDefault();
+          handlePress(null);
+        }}
+        onTouchCancel={(e) => {
+          e.preventDefault();
+          handlePress(null);
+        }}
         aria-label="Right"
       >
         <span className={styles['arrow-icon']}>►</span>
