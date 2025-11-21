@@ -35,7 +35,7 @@ export const Screen = (props: ScreenProps) => {
       {isInitialized && isLoading && (
         <div className={styles['loading-overlay']}>
           <img 
-            src="/loading.gif" 
+            src={`${import.meta.env.BASE_URL}loading.gif`}
             alt="Loading..." 
             className={styles['loading-gif']}
           />

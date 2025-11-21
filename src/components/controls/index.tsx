@@ -46,7 +46,7 @@ export const Controls = (props: ControlsProps) => {
         />
       </div>
       <img 
-        src="/pokemon-logo.png" 
+        src={`${import.meta.env.BASE_URL}pokemon-logo.png`}
         alt="Pokemon" 
         className={styles['pokemon-logo']} 
       />
