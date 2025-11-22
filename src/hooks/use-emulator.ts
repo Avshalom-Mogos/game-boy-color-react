@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useSaveManager } from './use-save-manager';
 
 // Declare EmulatorJS global variables for TypeScript
 declare global {
@@ -12,6 +13,26 @@ declare global {
     EJS_VirtualGamepadSettings: string;
     EJS_disableSettings?: boolean;
     EJS_gamepadSettings?: string;
+    EJS_autosaveInterval?: number;
+    EJS_onGameStart?: () => void;
+    EJS_emulator?: {
+      on: (event: string, callback: (data: any) => void) => void;
+      gameManager?: {
+        setFastForwardRatio: (ratio: number) => void;
+        toggleFastForward: (active: number) => void;
+        saveSaveFiles: () => void;
+        loadSaveFiles?: () => void;
+        getSaveFilePath: () => string;
+        FS?: {
+          syncfs: (populate: boolean, callback: (err?: Error) => void) => void;
+          analyzePath: (path: string) => { exists: boolean };
+          stat: (path: string) => { size: number; mtime: Date };
+          readFile: (path: string) => Uint8Array;
+          writeFile: (path: string, data: Uint8Array) => void;
+          mkdir: (path: string) => void;
+        };
+      };
+    };
   }
 }
 
@@ -35,6 +56,8 @@ export const useEmulator = (options: UseEmulatorOptions): UseEmulatorResult => {
   const [isLoading, setIsLoading] = useState(true);
   const [isInitialized, setIsInitialized] = useState(false);
   const [shouldInit, setShouldInit] = useState(options.autoStart ?? true);
+
+  useSaveManager();
 
   const initEmulator = () => {
     if (!isInitialized) {
