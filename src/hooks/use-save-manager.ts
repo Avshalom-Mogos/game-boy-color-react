@@ -38,12 +38,6 @@ export const useSaveManager = () => {
       console.log('Game started! Setting up features...');
       try {
         if (window.EJS_emulator?.gameManager) {
-          // 1. Enable Fast Forward
-          console.log('Enabling 15x fast forward...');
-          window.EJS_emulator.gameManager.setFastForwardRatio(15);
-          window.EJS_emulator.gameManager.toggleFastForward(1);
-          console.log('✓ Fast forward enabled');
-
           // Fix Save Persistence
           // The emulator has FS.syncfs commented out, so we must do it manually
           console.log('Setting up manual save sync...');
